@@ -1,6 +1,6 @@
 public class Runner {
     public static final String ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя.,\":-!? ";
-
+    public static final int MAGIC = 7;
     public static void main(String[] args) {
         int point = 0;
         while (point != 4) {
