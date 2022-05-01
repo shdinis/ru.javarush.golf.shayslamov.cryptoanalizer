@@ -22,6 +22,8 @@ public class BrutForce {
             for (int keyB = 1; keyB < alphabetCharRevers.length - 1; keyB++) {
 
                 countCommaSpace = 0;
+                countDotSpace = 0;
+                countSpace = 0;
                 try (
                         BufferedReader reader = new BufferedReader(new FileReader(inTxt));
                 ) {
@@ -40,11 +42,11 @@ public class BrutForce {
                         }
                         ch1 = ch2;
                     }
-                    System.out.println(keyB + "  -  " + countCommaSpace);
-                    if (countCommaSpace > tmp) {
-                        tmp = countCommaSpace;
+                    System.out.println(keyB + "  -  " + (countCommaSpace+countDotSpace+countSpace) + "|");
+
+                    if (countCommaSpace+countDotSpace+countSpace > tmp) {
+                        tmp = countCommaSpace+countDotSpace+countSpace;
                         key = keyB;
-                        System.out.println("    =    " + key);
                     }
                     loop = false;
                 } catch (FileNotFoundException fileNotFoundException) {
