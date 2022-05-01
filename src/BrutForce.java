@@ -1,33 +1,31 @@
 import java.io.*;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class BrutForce {
+
     public BrutForce(String alphabet) {
-        System.out.println("Здесь код взлома текста");
+        System.out.println("Здесь код взлома шифра");
         char[] alphabetCharRevers = Methods.Revers(alphabet.toCharArray());
-//        System.out.println("Выберите каким ключем расшифровать");
-        int key = 1; //Methods.Point(1, alphabetCharRevers.length - 1);
+        int key = 1;
         System.out.println("Введите полный путь к *.txt файлу где находится текст:");
         boolean loop = true;
         String outTxt = "";
         while (loop) {
             Scanner console = new Scanner(System.in);
             String inTxt = console.nextLine();
-//            String outTxt = OutTxt(inTxt);
-            try (
-                    BufferedReader reader = new BufferedReader(new FileReader(inTxt));
-//                    BufferedWriter writer = new BufferedWriter(new FileWriter(outTxt)))
-            ) {
-                outTxt = inTxt;
-                int countCommaSpace = 0;
-                int countDotSpace = 0;
-                int countSpace = 0;
-                char ch1 = 0;
 
-                for (int keyB = 1; keyB < alphabetCharRevers.length - 1; keyB++) {
-                    int tmp = countCommaSpace;
-                    countCommaSpace = 0;
+            int countCommaSpace = 0;
+            int countDotSpace = 0;
+            int countSpace = 0;
+            char ch1 = 0;
+            int tmp = 0;
+            for (int keyB = 1; keyB < alphabetCharRevers.length - 1; keyB++) {
+
+                countCommaSpace = 0;
+                try (
+                        BufferedReader reader = new BufferedReader(new FileReader(inTxt));
+                ) {
+                    outTxt = inTxt;
                     var map = Methods.aDictionaryFromAnArrayOfChar(alphabetCharRevers, keyB);
                     while (reader.ready()) {
                         char ch = (char) reader.read();
@@ -42,34 +40,24 @@ public class BrutForce {
                         }
                         ch1 = ch2;
                     }
+                    System.out.println(keyB + "  -  " + countCommaSpace);
                     if (countCommaSpace > tmp) {
+                        tmp = countCommaSpace;
                         key = keyB;
+                        System.out.println("    =    " + key);
                     }
+                    loop = false;
+                } catch (FileNotFoundException fileNotFoundException) {
+                    System.out.println("Файла по указанному пути нет.\n Ведите полный путь к *.txt файлу:");
+                    break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                loop = false;
-            } catch (FileNotFoundException fileNotFoundException) {
-                System.out.println("Файла по указанному пути нет.\n Ведите полный путь к *.txt файлу:");
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
-
+        System.out.println(key);
         Methods.Encrypting(alphabetCharRevers, key, outTxt, "Файл дешифрован.\n" +
-                "результат сохранен в ту же папку под названием out.txt"+
+                "результат сохранен в ту же папку под названием out.txt" +
                 "\nЖелаешь сделать что-то еще?\n");
-
     }
-
-
 }
-//    HashMap<Character, Integer> letterСount = new HashMap<>();
-
-//if(letterСount.containsKey(ch)){
-//        int count=letterСount.get(ch);
-//        letterСount.put(ch,++count);
-//        }else{
-//        letterСount.put(ch,1);
-//        }
-//        System.out.println(letterСount);
-//        letterСount.clear();
-//        System.out.println("---------------------");

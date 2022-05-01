@@ -1,6 +1,3 @@
-import java.io.*;
-import java.util.Scanner;
-
 public class Decryption {
 
     public Decryption(String alphabet) {
@@ -12,8 +9,6 @@ public class Decryption {
                 "результат сохранен в ту же папку под названием out.txt"+
                 "\nЖелаешь сделать что-то еще?\n");
     }
-
-
 }
 
 
