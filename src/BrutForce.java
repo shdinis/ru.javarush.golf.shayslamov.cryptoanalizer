@@ -42,8 +42,6 @@ public class BrutForce {
                         }
                         ch1 = ch2;
                     }
-                    System.out.println(keyB + "  -  " + (countCommaSpace+countDotSpace+countSpace) + "|");
-
                     if (countCommaSpace+countDotSpace+countSpace > tmp) {
                         tmp = countCommaSpace+countDotSpace+countSpace;
                         key = keyB;
