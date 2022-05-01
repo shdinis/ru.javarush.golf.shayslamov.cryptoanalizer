@@ -40,10 +40,10 @@ public class Methods {
             return out = "out.txt";
         } else if (lastIndex != -1) {
             out = in.substring(0, lastIndex + 1) + "out.txt";
-        } else { //if (lastIndex1 != -1) {
+        } else {
             out = in.substring(0, lastIndex1 + 1) + "out.txt";
         }
-//        System.out.println(out);
+
         return out;
     }
 
