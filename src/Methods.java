@@ -24,6 +24,10 @@ public class Methods {
 
     public static HashMap<Character, Character> aDictionaryFromAnArrayOfChar(char[] aChar, int key) {
         HashMap<Character, Character> map = new HashMap<>();
+        int keyCription = key%aChar.length;
+        if (keyCription == 0){
+        keyCription = keyCription + Runner.magic;
+        }
         for (int i = 0; i < aChar.length; i++) {
             char a = aChar[i];
             char b = aChar[(i + key) % aChar.length];
