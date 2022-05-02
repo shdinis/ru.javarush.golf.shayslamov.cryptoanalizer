@@ -36,18 +36,14 @@ public class Methods {
         return map;
     }
 
-    public static String OutTxt(String in) {
-        int lastIndex = in.lastIndexOf("\\");
-        int lastIndex1 = in.lastIndexOf("/");
+    public static String OutTxt(String in, String fileName) {
+        int lastIndex = in.lastIndexOf(".");
         String out = "";
-        if (lastIndex == -1 && lastIndex1 == -1) {
-            return out = "out.txt";
-        } else if (lastIndex != -1) {
-            out = in.substring(0, lastIndex + 1) + "out.txt";
+        if (lastIndex == -1) {
+            return out = fileName + ".txt";
         } else {
-            out = in.substring(0, lastIndex1 + 1) + "out.txt";
+            out = in.substring(0, lastIndex ) + fileName + ".txt";
         }
-
         return out;
     }
 
@@ -59,7 +55,7 @@ public class Methods {
         return revers;
     }
 
-    public static void Encrypting(char[] alphabet, int key, String file, String message) {
+    public static void Encrypting(char[] alphabet, int key, String file, String message, String fileName) {
         var mapAlphabet = aDictionaryFromAnArrayOfChar(alphabet, key);
         if (file == "") {
             System.out.println("Введите полный путь к *.txt файлу где находится текст: \n " +
@@ -80,19 +76,19 @@ public class Methods {
             } else {
                 inTxt = file;
             }
-            String outTxt = OutTxt(inTxt);
+            String outTxt = OutTxt(inTxt, fileName);
             try (
                     BufferedReader reader = new BufferedReader(new FileReader(inTxt));
                     BufferedWriter writer = new BufferedWriter(new FileWriter(outTxt))
             ) {
                 while (reader.ready()) {
-                    char ch = Character.toLowerCase ((char) reader.read());
-                    writer.append(mapAlphabet.getOrDefault(ch, ch));
+                    char ch = (char) reader.read();
+                    writer.append(mapAlphabet.getOrDefault(Character.toLowerCase(ch), ch));
                 }
                 loop = false;
             } catch (FileNotFoundException fileNotFoundException) {
                 System.out.println("Файла по указанному пути нет.\n Ведите полный путь к *.txt файлу\n" +
-                        "или \"2\" для возврата в главное меню:гагагагагаг");
+                        "или \"2\" для возврата в главное меню:");
             } catch (IOException e) {
                 e.printStackTrace();
             }

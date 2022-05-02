@@ -7,7 +7,7 @@ public class Encryption {
         int key = Methods.Point(1, Integer.MAX_VALUE);
         Methods.Encrypting(alphabetChar, key,"","Файл успешно зашифрован.\n" +
                 "результат сохранен в ту же папку под названием out.txt"+
-                "\nЖелаешь сделать что-то еще?\n");
+                "\nЖелаешь сделать что-то еще?\n","(зашифрован)");
     }
 }
 

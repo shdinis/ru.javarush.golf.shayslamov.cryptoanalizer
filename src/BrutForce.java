@@ -15,11 +15,8 @@ public class BrutForce {
         while (loop) {
             Scanner console = new Scanner(System.in);
             String inTxt;
-            if (console.hasNextInt()) {
-                if (console.nextInt() == 2) {
-                    console.nextLine();
-                    return;
-                }
+            if (console.hasNextInt() && (console.nextInt() == 2)) {
+                return;
             }
             inTxt = console.nextLine();
 
@@ -71,6 +68,6 @@ public class BrutForce {
         }
         Methods.Encrypting(alphabetCharRevers, key, outTxt, "Файл дешифрован.\n" +
                 "результат сохранен в ту же папку под названием out.txt" +
-                "\nЖелаешь сделать что-то еще?\n");
+                "\nЖелаешь сделать что-то еще?\n","(расшифрован подбором на основе анализа)");
     }
 }
