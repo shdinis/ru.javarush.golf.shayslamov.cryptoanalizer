@@ -80,10 +80,6 @@ public class Methods {
             } else {
                 inTxt = file;
             }
-//            if (inTxt == "2") {
-//                loop = false;
-//                message = "";
-//            }
             String outTxt = OutTxt(inTxt);
             try (
                     BufferedReader reader = new BufferedReader(new FileReader(inTxt));
