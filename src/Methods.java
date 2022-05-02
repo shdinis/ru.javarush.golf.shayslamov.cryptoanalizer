@@ -25,8 +25,8 @@ public class Methods {
     public static HashMap<Character, Character> aDictionaryFromAnArrayOfChar(char[] aChar, int key) {
         HashMap<Character, Character> map = new HashMap<>();
         int keyCription = key % aChar.length;
-        if (keyCription == 0){
-        keyCription = keyCription + Runner.MAGIC;
+        if (keyCription == 0) {
+            keyCription = keyCription + Runner.MAGIC;
         }
         for (int i = 0; i < aChar.length; i++) {
             char a = aChar[i];
@@ -61,33 +61,42 @@ public class Methods {
 
     public static void Encrypting(char[] alphabet, int key, String file, String message) {
         var mapAlphabet = aDictionaryFromAnArrayOfChar(alphabet, key);
-        System.out.println("Введите полный путь к *.txt файлу где находится текст: \n "+
-                          "или введите \"2\" чтобы вернутся в главное меню:");
+        if (file == "") {
+            System.out.println("Введите полный путь к *.txt файлу где находится текст: \n " +
+                    "или введите \"2\" чтобы вернутся в главное меню:");
+        }
         boolean loop = true;
         while (loop) {
             Scanner console = new Scanner(System.in);
             String inTxt;
+            if (console.hasNextInt()) {
+                if (console.nextInt() == 2) {
+                    console.nextLine();
+                    return;
+                }
+            }
             if (file == "") {
                 inTxt = console.nextLine();
             } else {
                 inTxt = file;
             }
-            if (inTxt == "2"){
-                break;
-            }
+//            if (inTxt == "2") {
+//                loop = false;
+//                message = "";
+//            }
             String outTxt = OutTxt(inTxt);
             try (
                     BufferedReader reader = new BufferedReader(new FileReader(inTxt));
                     BufferedWriter writer = new BufferedWriter(new FileWriter(outTxt))
             ) {
                 while (reader.ready()) {
-                    char ch = (char) reader.read();
+                    char ch = Character.toLowerCase ((char) reader.read());
                     writer.append(mapAlphabet.getOrDefault(ch, ch));
                 }
                 loop = false;
             } catch (FileNotFoundException fileNotFoundException) {
-                System.out.println("Файла по указанному пути нет.\n Ведите полный путь к *.txt файлу"+
-                                   "или \"2\" для возврата в главное меню:");
+                System.out.println("Файла по указанному пути нет.\n Ведите полный путь к *.txt файлу\n" +
+                        "или \"2\" для возврата в главное меню:гагагагагаг");
             } catch (IOException e) {
                 e.printStackTrace();
             }
