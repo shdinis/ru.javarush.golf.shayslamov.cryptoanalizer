@@ -65,13 +65,13 @@ public class Methods {
         while (loop) {
             Scanner console = new Scanner(System.in);
             String inTxt;
-            if (console.hasNextInt()) {
-                if (console.nextInt() == 2) {
-                    console.nextLine();
-                    return;
-                }
-            }
             if (file == "") {
+                if (console.hasNextInt()) {
+                    if (console.nextInt() == 2) {
+                        console.nextLine();
+                        return;
+                    }
+                }
                 inTxt = console.nextLine();
             } else {
                 inTxt = file;

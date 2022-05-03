@@ -14,16 +14,14 @@ public class BrutForce {
         boolean loop = true;
         while (loop) {
             Scanner console = new Scanner(System.in);
-            String inTxt;
             if (console.hasNextInt() && (console.nextInt() == 2)) {
                 return;
             }
-            inTxt = console.nextLine();
-
+            String inTxt=console.nextLine();;
+            outTxt = inTxt;
             try (
                     BufferedReader reader = new BufferedReader(new FileReader(inTxt));
             ) {
-                outTxt = inTxt;
                 while (reader.ready()) {
                     chars.add(Character.toLowerCase((char) reader.read()));
                 }
@@ -35,7 +33,6 @@ public class BrutForce {
                 e.printStackTrace();
             }
         }
-
         char[] alphabetCharRevers = Methods.Revers(alphabet.toCharArray());
         int key = 1;
         int countCommaSpace;
@@ -67,7 +64,7 @@ public class BrutForce {
             }
         }
         Methods.Encrypting(alphabetCharRevers, key, outTxt, "Файл дешифрован.\n" +
-                "результат сохранен в ту же папку под названием out.txt" +
+                "результат сохранен в ту же папку под названием *(расшифрован подбором на основе анализа).txt" +
                 "\nЖелаешь сделать что-то еще?\n","(расшифрован подбором на основе анализа)");
     }
 }

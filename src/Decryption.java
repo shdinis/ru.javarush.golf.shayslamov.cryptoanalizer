@@ -6,7 +6,7 @@ public class Decryption {
         System.out.println("Выберите каким ключем расшифровать");
         int key = Methods.Point(1, Integer.MAX_VALUE);
         Methods.Encrypting(alphabetCharRevers,key,"","Файл успешно расшифрован.\n" +
-                "результат сохранен в ту же папку под названием out.txt"+
+                "результат сохранен в ту же папку под названием *(расшифрован ключем).txt"+
                 "\nЖелаешь сделать что-то еще?\n","(расшифрован ключем)");
     }
 }
