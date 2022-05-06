@@ -1,13 +1,14 @@
-public class Encryption {
+public class Cryptographer {
 
-    public Encryption(String alphabet) {
+    public Cryptographer(String alphabet) {
         System.out.println("Здесь код шифрования текста");
-        char[] alphabetChar = alphabet.toCharArray();
+        char[] alphabetInCharArray = alphabet.toCharArray();
         System.out.println("Выберите каким ключем зашифровать");
-        int key = Methods.Point(1, Integer.MAX_VALUE);
-        Methods.Encrypting(alphabetChar, key,"","Файл успешно зашифрован.\n" +
+
+        int key = Methods.enteringNumberFromConsole(1, Integer.MAX_VALUE);
+
+        Methods.encrypting(alphabetInCharArray, key,"","Файл успешно зашифрован.\n" +
                 "результат сохранен в ту же папку под названием *(зашифрован).txt"+
                 "\nЖелаешь сделать что-то еще?\n","(зашифрован)");
     }
 }
-

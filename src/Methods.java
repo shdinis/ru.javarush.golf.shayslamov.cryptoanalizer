@@ -2,92 +2,97 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Methods {
-    public static int Point(int start, int end) {
-        int point;
+class Methods {
+
+    private Methods() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    public static int enteringNumberFromConsole(int start, int end) {
+        int result;
+
         System.out.printf("Введите число от %d до %d:\n", start, end);
         while (true) {
             Scanner console = new Scanner(System.in);
             if (console.hasNextInt()) {
-                point = console.nextInt();
-                if (start <= point && point <= end) {
+                result = console.nextInt();
+                if (start <= result && result <= end) {
                     break;
                 } else {
-                    System.out.printf("Нужно ввести число от %d до %d:\n", start, end);
+                    System.err.printf("Нужно ввести число от %d до %d:\n", start, end);
                 }
             } else if (console.hasNextLine()) {
-                System.out.printf("Нужно ввести число от %d до %d:\n", start, end);
+                System.err.printf("Нужно ввести число от %d до %d:\n", start, end);
             }
         }
-        return point;
+        return result;
     }
 
-    public static HashMap<Character, Character> aDictionaryFromAnArrayOfChar(char[] aChar, int key) {
-        HashMap<Character, Character> map = new HashMap<>();
-        int keyCription = key % aChar.length;
-        if (keyCription == 0) {
-            keyCription = keyCription + Runner.MAGIC;
+    public static HashMap<Character, Character> aDictionaryFromAnArrayOfChar(char[] alphabetFromChar, int keyCryption) {
+        var result = new HashMap<Character, Character>();
+        int key = keyCryption % alphabetFromChar.length;
+        char originalChar;
+        char replacementChar;
+
+        if (key == 0) {
+            key = key + Runner.MAGIC_KEY;
         }
-        for (int i = 0; i < aChar.length; i++) {
-            char a = aChar[i];
-            char b = aChar[(i + keyCription) % aChar.length];
-            map.put(a, b);
+        for (int i = 0; i < alphabetFromChar.length; i++) {
+            originalChar = alphabetFromChar[i];
+            replacementChar = alphabetFromChar[(i + key) % alphabetFromChar.length];
+            result.put(originalChar, replacementChar);
         }
-        return map;
+        return result;
     }
 
-    public static String OutTxt(String in, String fileName) {
+    public static String createOutputFilePathAndName(String in, String fileName) {
         int lastIndex = in.lastIndexOf(".");
-        String out = "";
-        if (lastIndex == -1) {
-            return out = fileName + ".txt";
-        } else {
-            out = in.substring(0, lastIndex ) + fileName + ".txt";
-        }
-        return out;
+        return (((lastIndex == -1) ? "" : (in.substring(0, lastIndex)))
+                + fileName + ".txt");
     }
 
-    public static char[] Revers(char[] chars) {
-        char[] revers = new char[chars.length];
-        for (int i = 0; i < revers.length; i++) {
-            revers[revers.length - 1 - i] = chars[i];
+    public static char[] reverse(char[] chars) {
+        char[] result = new char[chars.length];
+        for (int i = 0; i < result.length; i++) {
+            result[result.length - 1 - i] = chars[i];
         }
-        return revers;
+        return result;
     }
 
-    public static void Encrypting(char[] alphabet, int key, String file, String message, String fileName) {
-        var mapAlphabet = aDictionaryFromAnArrayOfChar(alphabet, key);
-        if (file == "") {
+    public static void encrypting(char[] alphabetInCharArray, int keyCription, String inputFileName, String message, String outputFileName) {
+        var mapAlphabet = aDictionaryFromAnArrayOfChar(alphabetInCharArray, keyCription);
+        boolean loop = true;
+        String inFileTxt;
+        char currentChar;
+
+        if (inputFileName.equals("")) {
             System.out.println("Введите полный путь к *.txt файлу где находится текст: \n " +
                     "или введите \"2\" чтобы вернутся в главное меню:");
         }
-        boolean loop = true;
+
         while (loop) {
             Scanner console = new Scanner(System.in);
-            String inTxt;
-            if (file == "") {
-                if (console.hasNextInt()) {
-                    if (console.nextInt() == 2) {
-                        console.nextLine();
-                        return;
-                    }
+            if (inputFileName.equals("")) {
+                if (console.hasNextInt() && (console.nextInt() == 2)) {
+                    return;
                 }
-                inTxt = console.nextLine();
+                inFileTxt = console.nextLine();
             } else {
-                inTxt = file;
+                inFileTxt = inputFileName;
             }
-            String outTxt = OutTxt(inTxt, fileName);
+            String outFileTxt = createOutputFilePathAndName(inFileTxt, outputFileName);
+
             try (
-                    BufferedReader reader = new BufferedReader(new FileReader(inTxt));
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(outTxt))
+                    BufferedReader reader = new BufferedReader(new FileReader(inFileTxt));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(outFileTxt))
             ) {
                 while (reader.ready()) {
-                    char ch = (char) reader.read();
-                    writer.append(mapAlphabet.getOrDefault(Character.toLowerCase(ch), ch));
+                    currentChar = (char) reader.read();
+                    writer.append(mapAlphabet.getOrDefault(Character.toLowerCase(currentChar), currentChar));
                 }
                 loop = false;
             } catch (FileNotFoundException fileNotFoundException) {
-                System.out.println("Файла по указанному пути нет.\n Ведите полный путь к *.txt файлу\n" +
+                System.err.println("Файла по указанному пути нет.\n Ведите полный путь к *.txt файлу\n" +
                         "или \"2\" для возврата в главное меню:");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -95,5 +100,4 @@ public class Methods {
         }
         System.out.println(message);
     }
-
 }
