@@ -3,13 +3,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BruteForceDecoderThroughAnalysis {
+    private final char[] reversedAlphabetInCharArray = Methods.reverse(Runner.ALPHABET.toCharArray());
 
-    public BruteForceDecoderThroughAnalysis(String alphabet) {
-        int keyCription = 1;
-        String inTxt;
+    public BruteForceDecoderThroughAnalysis() {
         String outTxt = "";
         ArrayList<Character> temporaryArrayOfParsedText = new ArrayList<>();
-        char[] alphabetCharRevers = Methods.reverse(alphabet.toCharArray());
 
         System.out.println("Здесь код взлома шифра");
 
@@ -22,10 +20,10 @@ public class BruteForceDecoderThroughAnalysis {
             if (console.hasNextInt() && (console.nextInt() == 2)) {
                 return;
             }
-            inTxt = console.nextLine();
+            String inTxt = console.nextLine();
             outTxt = inTxt;
             try (
-                    BufferedReader reader = new BufferedReader(new FileReader(inTxt));
+                    BufferedReader reader = new BufferedReader(new FileReader(inTxt))
             ) {
                 while (reader.ready()) {
                     temporaryArrayOfParsedText.add(Character.toLowerCase((char) reader.read()));
@@ -39,14 +37,14 @@ public class BruteForceDecoderThroughAnalysis {
             }
         }
 
-        keyCription = key(alphabetCharRevers, temporaryArrayOfParsedText);
+        int keyCryption = key(temporaryArrayOfParsedText);
 
-        Methods.encrypting(alphabetCharRevers, keyCription, outTxt, "Файл дешифрован.\n" +
+        Methods.encrypting(reversedAlphabetInCharArray, keyCryption, outTxt, "Файл дешифрован.\n" +
                 "результат сохранен в ту же папку под названием *(расшифрован подбором на основе анализа).txt" +
                 "\nЖелаешь сделать что-то еще?\n", "(расшифрован подбором на основе анализа)");
     }
 
-    private int key(char[] alphabetCharRev, ArrayList<Character> temArrayOfParsedText) {
+    private int key(ArrayList<Character> temArrayOfParsedText) {
         int result = 1;
         int countCommaSpace;
         int countDotSpace;
@@ -56,8 +54,8 @@ public class BruteForceDecoderThroughAnalysis {
         char charAfterDecryption;
         int tmpCount = 0;
 
-        for (int key = 1; key < alphabetCharRev.length - 1; key++) {
-            var map = Methods.aDictionaryFromAnArrayOfChar(alphabetCharRev, key);
+        for (int key = 1; key < reversedAlphabetInCharArray.length - 1; key++) {
+            var map = Methods.aDictionaryFromAnArrayOfChar(reversedAlphabetInCharArray, key);
             countCommaSpace = 0;
             countDotSpace = 0;
             countSpace = 0;

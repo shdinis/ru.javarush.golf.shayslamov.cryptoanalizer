@@ -1,17 +1,18 @@
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
-class Methods {
+public final class Methods {
 
     private Methods() {
-        throw new IllegalStateException("Utility class");
     }
 
     public static int enteringNumberFromConsole(int start, int end) {
         int result;
 
         System.out.printf("Введите число от %d до %d:\n", start, end);
+
         while (true) {
             Scanner console = new Scanner(System.in);
             if (console.hasNextInt()) {
@@ -28,7 +29,7 @@ class Methods {
         return result;
     }
 
-    public static HashMap<Character, Character> aDictionaryFromAnArrayOfChar(char[] alphabetFromChar, int keyCryption) {
+    public static Map<Character, Character> aDictionaryFromAnArrayOfChar(char[] alphabetFromChar, int keyCryption) {
         var result = new HashMap<Character, Character>();
         int key = keyCryption % alphabetFromChar.length;
         char originalChar;
@@ -59,8 +60,8 @@ class Methods {
         return result;
     }
 
-    public static void encrypting(char[] alphabetInCharArray, int keyCription, String inputFileName, String message, String outputFileName) {
-        var mapAlphabet = aDictionaryFromAnArrayOfChar(alphabetInCharArray, keyCription);
+    public static void encrypting(char[] alphabetInCharArray, int keyCryption, String inputFileName, String message, String outputFileName) {
+        var mapAlphabet = aDictionaryFromAnArrayOfChar(alphabetInCharArray, keyCryption);
         boolean loop = true;
         String inFileTxt;
         char currentChar;
