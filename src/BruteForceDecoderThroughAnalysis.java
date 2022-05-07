@@ -4,12 +4,9 @@ import java.util.Scanner;
 
 public class BruteForceDecoderThroughAnalysis {
 
-    public BruteForceDecoderThroughAnalysis(String alphabet) {
-        int keyCription = 1;
-        String inTxt;
+    public BruteForceDecoderThroughAnalysis() {
         String outTxt = "";
         ArrayList<Character> temporaryArrayOfParsedText = new ArrayList<>();
-        char[] alphabetCharRevers = Methods.reverse(alphabet.toCharArray());
 
         System.out.println("Здесь код взлома шифра");
 
@@ -22,10 +19,10 @@ public class BruteForceDecoderThroughAnalysis {
             if (console.hasNextInt() && (console.nextInt() == 2)) {
                 return;
             }
-            inTxt = console.nextLine();
+            String inTxt = console.nextLine();
             outTxt = inTxt;
             try (
-                    BufferedReader reader = new BufferedReader(new FileReader(inTxt));
+                    BufferedReader reader = new BufferedReader(new FileReader(inTxt))
             ) {
                 while (reader.ready()) {
                     temporaryArrayOfParsedText.add(Character.toLowerCase((char) reader.read()));
@@ -39,9 +36,9 @@ public class BruteForceDecoderThroughAnalysis {
             }
         }
 
-        keyCription = key(alphabetCharRevers, temporaryArrayOfParsedText);
+        int keyCryption = key(Runner.reversedAlphabetInCharArray, temporaryArrayOfParsedText);
 
-        Methods.encrypting(alphabetCharRevers, keyCription, outTxt, "Файл дешифрован.\n" +
+        Methods.encrypting(Runner.reversedAlphabetInCharArray, keyCryption, outTxt, "Файл дешифрован.\n" +
                 "результат сохранен в ту же папку под названием *(расшифрован подбором на основе анализа).txt" +
                 "\nЖелаешь сделать что-то еще?\n", "(расшифрован подбором на основе анализа)");
     }
