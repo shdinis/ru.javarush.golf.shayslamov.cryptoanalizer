@@ -1,6 +1,8 @@
 public class Runner {
     public static final String ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя.,\":-!? ";
     public static final int MAGIC_KEY = 7;
+    public static char[] alphabetInCharArray = ALPHABET.toCharArray();
+    public static char[] reversedAlphabetInCharArray = Methods.reverse(ALPHABET.toCharArray());
 
     public static void main(String[] args) {
         int point = 0;

@@ -3,6 +3,7 @@ public class Cryptographer {
             "результат сохранен в ту же папку под названием *(зашифрован).txt\n" +
             "Желаешь сделать что-то еще?\n";
     private static final String ENDING_TO_NAME = "(зашифрован)";
+
     private final char[] alphabetInCharArray = Runner.ALPHABET.toCharArray();
 
     public Cryptographer() {
