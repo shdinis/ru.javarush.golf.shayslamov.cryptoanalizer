@@ -3,14 +3,14 @@ public class Decoder {
             "результат сохранен в ту же папку под названием *(расшифрован ключем).txt\n" +
             "Желаешь сделать что-то еще?\n";
     private static final String ENDING_TO_NAME = "(расшифрован ключем)";
-    private int key;
+    private final char[] reversedAlphabetInCharArray = Methods.reverse(Runner.ALPHABET.toCharArray());
 
     public Decoder() {
         System.out.println("Здесь код расшифрования текста");
         System.out.println("Выберите каким ключем расшифровать");
 
-        key = Methods.enteringNumberFromConsole(1, Integer.MAX_VALUE);
+        int key = Methods.enteringNumberFromConsole(1, Integer.MAX_VALUE);
 
-        Methods.encrypting(Runner.reversedAlphabetInCharArray, key, "", MESSAGE, ENDING_TO_NAME);
+        Methods.encrypting(reversedAlphabetInCharArray, key, "", MESSAGE, ENDING_TO_NAME);
     }
 }

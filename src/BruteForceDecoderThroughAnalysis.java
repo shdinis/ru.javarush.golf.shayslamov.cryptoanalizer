@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BruteForceDecoderThroughAnalysis {
+    private final char[] reversedAlphabetInCharArray = Methods.reverse(Runner.ALPHABET.toCharArray());
 
     public BruteForceDecoderThroughAnalysis() {
         String outTxt = "";
@@ -36,14 +37,14 @@ public class BruteForceDecoderThroughAnalysis {
             }
         }
 
-        int keyCryption = key(Runner.reversedAlphabetInCharArray, temporaryArrayOfParsedText);
+        int keyCryption = key(temporaryArrayOfParsedText);
 
-        Methods.encrypting(Runner.reversedAlphabetInCharArray, keyCryption, outTxt, "Файл дешифрован.\n" +
+        Methods.encrypting(reversedAlphabetInCharArray, keyCryption, outTxt, "Файл дешифрован.\n" +
                 "результат сохранен в ту же папку под названием *(расшифрован подбором на основе анализа).txt" +
                 "\nЖелаешь сделать что-то еще?\n", "(расшифрован подбором на основе анализа)");
     }
 
-    private int key(char[] alphabetCharRev, ArrayList<Character> temArrayOfParsedText) {
+    private int key(ArrayList<Character> temArrayOfParsedText) {
         int result = 1;
         int countCommaSpace;
         int countDotSpace;
@@ -53,8 +54,8 @@ public class BruteForceDecoderThroughAnalysis {
         char charAfterDecryption;
         int tmpCount = 0;
 
-        for (int key = 1; key < alphabetCharRev.length - 1; key++) {
-            var map = Methods.aDictionaryFromAnArrayOfChar(alphabetCharRev, key);
+        for (int key = 1; key < reversedAlphabetInCharArray.length - 1; key++) {
+            var map = Methods.aDictionaryFromAnArrayOfChar(reversedAlphabetInCharArray, key);
             countCommaSpace = 0;
             countDotSpace = 0;
             countSpace = 0;

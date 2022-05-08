@@ -5,13 +5,7 @@ import java.util.Scanner;
 
 public final class Methods {
 
-    private static final Methods METHODS = new Methods();
-
     private Methods() {
-    }
-
-    public static Methods getMETHODS() {
-        return METHODS;
     }
 
     public static int enteringNumberFromConsole(int start, int end) {
